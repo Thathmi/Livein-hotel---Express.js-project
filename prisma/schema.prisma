@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+   url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  firstName     String
+  lastName      String
+  email         String
+  password      String
+  user_type     String
+  date_of_birth String
+  login_with    String
+  facebook_id   String
+  twitter_id    String
+  about         String
+  status        String
+  created       DateTime @default(now())
+  modified      DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Hotel {
+  id       String      @id @default(uuid())
+  name     String
+  location String
+  description String
+  user_id Int
+  property_id Int
+  country_id Int
+  state_id Int
+  city_id Int
+  commission_id Int
+  address String
+  longitute String
+  latitude String
+  minimum_stay Int
+  refund_type Int
+  status Int
+  modified DateTime  @default(now())
+  created	  DateTime @default(now())
+}
+
+model Countries {
+  id       Int      @id @default(autoincrement())
+  name     String
+  code     String
+  status   Int
+  created  DateTime @default(now())
+  modified DateTime @updatedAt
+
+  @@map("countries")
+}
+
+model Commissions {
+  id       Int      @id @default(autoincrement())
+  rate     Decimal
+  status   Int
+  created  DateTime @default(now())
+  modified DateTime @updatedAt
+
+  @@map("commissions")
+}
+
+model Status {
+  id       Int      @id @default(autoincrement())
+  name     String
+  code     String
+  status   Int
+  created  DateTime @default(now())
+  modified DateTime @updatedAt
+
+  @@map("status")
+}
+
+
+
